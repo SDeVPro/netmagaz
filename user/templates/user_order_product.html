@@ -1,0 +1,81 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} Order Product List  {% endblock %}
+{% block description %}  {{ category.description }}{% endblock %}
+{% block keywords %}  {{ category.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active"> Order Product List </li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+        <div class="col-md-2">
+            {% include 'user_panel.html' %}
+        </div>
+                    <div class="col-md-10">
+						<div class="order-summary clearfix">
+							<div class="section-title">
+								<h3 class="title">Order Product List</h3>
+							</div>
+                            <table class="shopping-cart-table table">
+
+									<tr>
+
+										<th class="text-center">ID:</th>
+                                        <th class="text-center">Product Name:</th>
+                                        <th class="text-center">Price:</th>
+                                        <th class="text-center">Quantity:</th>
+                                        <th class="text-center">Amount:</th>
+										<th class="text-center">Status: </th>
+										<th class="text-center">Date: </th>
+
+									</tr>
+								{% for rs in order_product %}
+                                    <tr>
+
+										<td class="text-left"><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                            <img src="{{ rs.product.image.url }}" style="height: 60px" alt="">
+                                        </a></td>
+
+                                        <td class="text-left">{{rs.product.title}}</td>
+                                        <td class="text-left">{{rs.price}}</td>
+                                        <td class="text-left">{{rs.quantity}}</td>
+                                        <td class="text-left">{{rs.amount}}</td>
+                                        <td class="text-left">{{rs.status}}</td>
+                                        <td class="text-left">{{rs.create_at}}</td>
+                                        <td class="text-left"><a class="primary-btn" href="/user/order_product_detail/{{ rs.id }}/{{ rs.order.id }}">Detail</a></td>
+
+
+                                    </tr>
+                                {% endfor %}
+
+							</table>
+						</div>
+
+					</div>
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+
+
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}

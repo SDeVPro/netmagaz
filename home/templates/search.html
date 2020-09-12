@@ -1,0 +1,35 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %}{{ query }} Results {% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">{{ query }}Results</li>
+            </ul>
+        </div>
+    </div>
+
+    <tbody>
+    {% for rs in products %}
+        <tr>
+            <td class="thumb"><a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                <img src="{{ rs.image.url }}" style="height: 100px" alt="">
+            </a></td>
+            <td class="details">
+                <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
+            </td>
+            <td class="price text-center"><strong>{{ rs.price }} so'm</strong></td>
+            <td class="qty text-right"><input class="input" type="number" value="1"></td>
+            <td class="text-right"><a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}
+{% block footer %} {% include 'footer.html' %}{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %}{{ category.title }}Products {% endblock %}
+{% block keywords %}{{ category.keywords }}{% endblock %}
+{% block description %}{{ category.description }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">{{ category.title }} Products</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+               {% for rs in products %}
+                    <tr>
+                        <td class="thumb"><a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                            <img src="{{ rs.image.url }}" style="height: 100px" alt=""></a></td>
+                        <td class="details">
+                            <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>
+                        </td>
+                        <td class="price text-center"><strong>{{ rs.price }} so'm</strong></td>
+                        <td class="qty text-center"><input class="input" type="number" value="1"></td>
+                        <td class="text-right"><a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i>Add to shopcart</a></td>
+                    </tr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %} {% include 'footer.html' %}{% endblock %}

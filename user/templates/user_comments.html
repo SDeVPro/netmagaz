@@ -1,0 +1,87 @@
+{% extends 'homebase.html' %}
+{% load static %}
+{% block title %} User Comments List {% endblock %}
+{% block description %}  {{ category.description }}{% endblock %}
+{% block keywords %}  {{ category.keywords }}{% endblock %}
+
+{% block sidebar %}{% include 'sidebar.html' %} {% endblock %}
+
+{% block body %}
+    	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active"> User Comments List </li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+        <div class="col-md-3">
+            {% include 'user_panel.html' %}
+        </div>
+                    <div class="col-md-9">
+						<div class="order-summary clearfix">
+							<div class="section-title">
+								<h3 class="title">User Comments List</h3>
+							</div>
+							<table class="shopping-cart-table table">
+								<thead>
+									<tr>
+
+										<th class="text-center">Product:</th>
+                                        <th class="text-center">Rate:</th>
+                                        <th class="text-center">Subject:</th>
+                                        <th class="text-center">Comment:</th>
+                                        <th class="text-center">Status:</th>
+										<th class="text-center">Date: </th>
+										<th class="text-center">Detail: </th>
+
+									</tr>
+								</thead>
+								<tbody>
+                                {% for rs in comments %}
+									<tr>
+										<td class="text-left">
+                                            <a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                                                <strong>{{ rs.product.title }}</strong>
+                                            </a></td>
+										<td class="text-left">
+											{{ rs.rate }}
+										</td>
+										<td class="text-left">{{rs.subject}}</td>
+
+                                        <td class="text-left">{{rs.comment}}</td>
+                                        <td class="text-left">{{rs.status}}</td>
+                                        <td class="text-left">{{rs.create_at}}</td>
+
+                                        <td class="text-left"><a class="primary-btn" href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Delete! Are you sure?')" class="main-btn icon-btn"><i class="fa fa-close"></i>Delete</a></td>
+                                        <td class="text-left">{{rs.code}}</td>
+
+                                       	</tr>
+                                {% endfor %}
+
+								</tbody>
+							</table>
+
+						</div>
+
+					</div>
+
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+
+
+ {% endblock %}
+{% block footer %}{% include 'footer.html' %} {% endblock %}
